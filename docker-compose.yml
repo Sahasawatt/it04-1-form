@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: it04
+      POSTGRES_PASSWORD: it04pass
+      POSTGRES_DB: it04
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U it04 -d it04"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    environment:
+      DATABASE_URL: postgresql://it04:it04pass@db:5432/it04?schema=public
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  pgdata:

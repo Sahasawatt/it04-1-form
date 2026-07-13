@@ -1,0 +1,331 @@
+:root {
+  --green: #2e7d32;
+  --green-dark: #1b5e20;
+  --green-bg: #e8f5e9;
+  --grey-page: #f0f2f5;
+  --grey-btn: #9e9e9e;
+  --grey-btn-dark: #757575;
+  --red: #d32f2f;
+  --border: #d0d5dd;
+  --text: #1f2937;
+  --label: #374151;
+  --card-bg: #ffffff;
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--grey-page);
+  color: var(--text);
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 16px;
+}
+
+.card {
+  width: 100%;
+  max-width: 720px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  background: var(--green);
+  color: #fff;
+  padding: 16px 24px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.header-link {
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.18);
+  padding: 6px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.header-link:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.card-body {
+  padding: 24px;
+}
+
+.success-banner {
+  background: var(--green-bg);
+  color: var(--green-dark);
+  border: 1px solid var(--green);
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.form-error {
+  color: var(--red);
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+.field > label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--label);
+}
+
+.field input[type="text"],
+.field select {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--text);
+  width: 100%;
+}
+
+.field input[type="text"]:focus,
+.field select:focus {
+  outline: 2px solid var(--green);
+  outline-offset: 1px;
+  border-color: var(--green);
+}
+
+.error {
+  color: var(--red);
+  font-size: 0.8rem;
+}
+
+.file-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.file-picker-btn {
+  display: inline-block;
+  padding: 9px 18px;
+  background: #eef1f4;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.file-picker-btn:hover {
+  background: #e2e6ea;
+}
+
+.file-input-hidden {
+  display: none;
+}
+
+.file-name {
+  font-size: 0.85rem;
+  color: #4b5563;
+  overflow-wrap: anywhere;
+}
+
+.preview-img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.radio-group {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  padding-top: 4px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.radio-option input {
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn {
+  padding: 11px 28px;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-save {
+  background: var(--green);
+  color: #fff;
+}
+
+.btn-save:hover:not(:disabled) {
+  background: var(--green-dark);
+}
+
+.btn-clear {
+  background: var(--grey-btn);
+  color: #fff;
+}
+
+.btn-clear:hover {
+  background: var(--grey-btn-dark);
+}
+
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-body {
+    padding: 18px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* ---- Saved-records list page (/persons) ---- */
+.card.wide {
+  max-width: 1040px;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.data-table th,
+.data-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.data-table th {
+  background: var(--green-bg);
+  color: var(--green-dark);
+  font-weight: 700;
+}
+
+.data-table tbody tr:hover {
+  background: #f7faf7;
+}
+
+.data-table .muted {
+  color: #6b7280;
+  font-size: 0.82rem;
+}
+
+.thumb {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+.thumb-link {
+  display: inline-block;
+  line-height: 0;
+  cursor: pointer;
+}
+
+.thumb-link:hover .thumb {
+  outline: 2px solid var(--green);
+  outline-offset: 1px;
+}
+
+.no-img {
+  color: #9ca3af;
+}
+
+.empty {
+  text-align: center;
+  color: #6b7280;
+  padding: 24px 0;
+}
+
+.empty a {
+  color: var(--green);
+  font-weight: 600;
+}
