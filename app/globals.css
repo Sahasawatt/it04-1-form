@@ -117,6 +117,7 @@ body {
 }
 
 .field input[type="text"],
+.field input[type="date"],
 .field select {
   padding: 10px 12px;
   border: 1px solid var(--border);
@@ -128,6 +129,7 @@ body {
 }
 
 .field input[type="text"]:focus,
+.field input[type="date"]:focus,
 .field select:focus {
   outline: 2px solid var(--green);
   outline-offset: 1px;

@@ -37,16 +37,17 @@ const EMPTY_FORM: FormFields = {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_RE = /^\+?\d{9,15}$/;
-const BIRTHDAY_RE = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+// The native date input (<input type="date">) hands us yyyy-mm-dd.
+const ISO_DATE_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
 
-// dd/mm/yyyy, a real calendar date, not in the future, year 1900..current.
+// yyyy-mm-dd, a real calendar date, not in the future, year 1900..current.
 function isValidBirthDay(value: string): boolean {
-  const match = BIRTHDAY_RE.exec(value.trim());
+  const match = ISO_DATE_RE.exec(value.trim());
   if (!match) return false;
 
-  const day = Number(match[1]);
+  const year = Number(match[1]);
   const month = Number(match[2]);
-  const year = Number(match[3]);
+  const day = Number(match[3]);
   const currentYear = new Date().getFullYear();
   if (year < 1900 || year > currentYear) return false;
 
@@ -64,6 +65,12 @@ function isValidBirthDay(value: string): boolean {
   const now = new Date();
   const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   return date <= todayMidnight;
+}
+
+// The API contract takes dd/mm/yyyy; the native date input gives yyyy-mm-dd.
+function toDdMmYyyy(iso: string): string {
+  const [year, month, day] = iso.split("-");
+  return `${day}/${month}/${year}`;
 }
 
 function validate(f: FormFields): Record<string, string> {
@@ -133,7 +140,7 @@ export default function Page() {
       const res = await fetch("/api/persons", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, birthDay: toDdMmYyyy(form.birthDay) }),
       });
 
       if (res.status === 201) {
@@ -245,8 +252,8 @@ export default function Page() {
               <label htmlFor="birthDay">Birth Day</label>
               <input
                 id="birthDay"
-                type="text"
-                placeholder="dd/mm/yyyy"
+                type="date"
+                min="1900-01-01"
                 value={form.birthDay}
                 onChange={(e) => updateField("birthDay", e.target.value)}
               />
